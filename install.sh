@@ -9,11 +9,11 @@
 # @@Copyright        :  Copyright: (c) 2022 Jason Hempstead, Casjays Developments
 # @@Created          :  Thursday, Sep 29, 2022 13:15 EDT
 # @@File             :  install.sh
-# @@Description      :  
+# @@Description      :
 # @@Changelog        :  New script
 # @@TODO             :  Better documentation
-# @@Other            :  
-# @@Resource         :  
+# @@Other            :
+# @@Resource         :
 # @@Terminal App     :  no
 # @@sudo/root        :  no
 # @@Template         :  installers/dockermgr
@@ -130,10 +130,10 @@ NGINX_HTTPS="${NGINX_HTTPS:-443}"
 NGINX_PORT="${NGINX_HTTPS:-$NGINX_HTTP}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Port Setup [ _INT is container port ] [ _EXT is docker ]
-SERVER_PORT_EXT="${SERVER_PORT_EXT:-}"
-SERVER_PORT_INT="${SERVER_PORT_INT:-}"
-SERVER_PORT_ADMIN_EXT="${SERVER_PORT_ADMIN_EXT:-}"
-SERVER_PORT_ADMIN_INT="${SERVER_PORT_ADMIN_INT:-}"
+SERVER_PORT_EXT="${SERVER_PORT_EXT:-2500}"
+SERVER_PORT_INT="${SERVER_PORT_INT:-2500}"
+SERVER_PORT_ADMIN_EXT="${SERVER_PORT_ADMIN_EXT:-5500}"
+SERVER_PORT_ADMIN_INT="${SERVER_PORT_ADMIN_INT:-5500}"
 SERVER_PORT_OTHER_EXT="${SERVER_PORT_OTHER_EXT:-}"
 SERVER_PORT_OTHER_INT="${SERVER_PORT_OTHER_INT:-}"
 SERVER_WEB_PORT="${SERVER_WEB_PORT:-$SERVER_PORT}"
@@ -227,7 +227,8 @@ else
     -e TZ="$SERVER_TIMEZONE" \
     -v $LOCAL_DATA_DIR:/app/data \
     -v $LOCAL_CONFIG_DIR:/app/config \
-    -p $SERVER_LISTEN:$SERVER_PORT_EXT:$SERVER_PORT_INT \
+    -p $SERVER_PORT_EXT:$SERVER_PORT_INT \
+    -p $SERVER_PORT_ADMIN_EXT:$SERVER_PORT_ADMIN_INT \
     "$HUB_URL" &>/dev/null
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
